@@ -27,4 +27,30 @@ void loop()
     Serial.print(cm);
     Serial.println("cm");
     delay(100);
+
+	MotorLeft.setSpeed(SPEED);
+	MotorRight.setSpeed(SPEED);
+
+	MotorLeft.run(FORWARD);
+	MotorRight.run(FORWARD);
+	delay(1000);
+
+	MotorLeft.run(BACKWARD);
+	MotorRight.run(BACKWARD);
+	delay(1000);
+
+	MotorLeft.run(BACKWARD);
+	MotorRight.run(FORWARD);
+	delay(1000);
+
+	MotorLeft.run(FORWARD);
+	MotorRight.run(BACKWARD);
+	delay(1000);
+
+	MotorLeft.setSpeed(0);
+	MotorRight.setSpeed(0);
+
+	MotorLeft.run(BRAKE);
+	MotorRight.run(BRAKE);
+	delay(1000);
 }
