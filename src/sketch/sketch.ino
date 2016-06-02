@@ -9,7 +9,7 @@
 
 // Motor Configurations
 #define MAX_SPEED 255
-#define MIN_SPEED 200
+#define MIN_SPEED 150
 #define MOTOR_LEFT 3
 #define MOTOR_RIGHT 2
 
@@ -35,32 +35,28 @@ void loop() {
     delay(100);
 
 	turn = false;
-	if(cm == 0) {
-		speed = MAX_SPEED;
-	} else if(cm > MIN_DISTANCE) {
-		speed = MIN_SPEED;
-	} else {
-		speed = MAX_SPEED;
-		turn = true;
+  speed = MAX_SPEED;
+	if(cm > 0 && cm <= MIN_DISTANCE) {
+    speed = MIN_SPEED;
+    turn = true;
+	} else if(cm > MIN_DISTANCE && cm <= MAX_DISTANCE) {
+    speed = MIN_SPEED;
 	}
 
 	MotorLeft.setSpeed(speed);
 	MotorRight.setSpeed(speed);
 
-	if(speed > 0) {
-		MotorLeft.run(FORWARD);
-		MotorRight.run(FORWARD);
-	} else if(turn) {
+	if(turn) {
 		MotorLeft.setSpeed(0);
 		MotorRight.setSpeed(0);
 		MotorLeft.run(BRAKE);
 		MotorRight.run(BRAKE);
-	MotorLeft.setSpeed(speed);
-	MotorRight.setSpeed(speed);
+    MotorLeft.setSpeed(speed);
+    MotorRight.setSpeed(speed);
 		MotorLeft.run(FORWARD);
 		MotorRight.run(BACKWARD);
 	} else {
-		MotorLeft.run(BRAKE);
-		MotorRight.run(BRAKE);
+    MotorLeft.run(FORWARD);
+    MotorRight.run(FORWARD);
 	}
 }
